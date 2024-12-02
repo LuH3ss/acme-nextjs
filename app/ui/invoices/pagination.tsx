@@ -38,9 +38,9 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
 
   const allPages = generatePagination(currentPage, totalPages);
 
-  console.log('Current Pathname:', pathName);
-console.log('Current Params:', searchParams?.toString());
-console.log('Generated Pages:', allPages);
+//   console.log('Current Pathname:', pathName);
+// console.log('Current Params:', searchParams?.toString());
+// console.log('Generated Pages:', allPages);
   return (
     <>
       {/*  NOTE: Uncomment this code in Chapter 11 */}
