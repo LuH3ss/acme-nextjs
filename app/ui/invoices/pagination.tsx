@@ -29,7 +29,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   //   return `${basePath}?${params.toString()}`;
   // }
 
-  const createPageURL = (pageNumber: number) => {
+  const createPageURL = (pageNumber: number | string) => {
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.set('page', pageNumber.toString());
     return `${pathName}?${newParams.toString()}`;
