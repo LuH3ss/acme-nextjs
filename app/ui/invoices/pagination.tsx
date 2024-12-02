@@ -4,17 +4,48 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { generatePagination } from '@/app/lib/utils';
+import { usePathname,  useSearchParams } from 'next/navigation';
+
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
   // NOTE: Uncomment this code in Chapter 11
 
-  // const allPages = generatePagination(currentPage, totalPages);
+  
+  const pathName = usePathname()
+  const searchParams = useSearchParams()
+  const currentPage = Number(searchParams?.get('page') || 1)
+  console.log('Current Page:', currentPage);
 
+  if (!searchParams) {
+    console.error('No searchParams found.');
+  }
+  
+  // const createPageURL = (pageNumber : number | string) => {
+  //   console.log(pathName);
+  //   const params = new URLSearchParams(searchParams)
+  //   const params = new URLSearchParams(searchParams?.toString() || '');
+  //   params.set('page', pageNumber.toString())
+  //   const basePath = pathName.includes('?') ? pathName.split('?')[0] : pathName; // Eliminar cualquier query string previa
+  //   return `${basePath}?${params.toString()}`;
+  // }
+
+  const createPageURL = (pageNumber: number) => {
+    const newParams = new URLSearchParams(searchParams.toString());
+    newParams.set('page', pageNumber.toString());
+    return `${pathName}?${newParams.toString()}`;
+  };
+
+
+  const allPages = generatePagination(currentPage, totalPages);
+
+  console.log('Current Pathname:', pathName);
+console.log('Current Params:', searchParams?.toString());
+console.log('Generated Pages:', allPages);
   return (
     <>
       {/*  NOTE: Uncomment this code in Chapter 11 */}
 
-      {/* <div className="inline-flex">
+      <div className="inline-flex">
         <PaginationArrow
           direction="left"
           href={createPageURL(currentPage - 1)}
@@ -47,7 +78,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
           href={createPageURL(currentPage + 1)}
           isDisabled={currentPage >= totalPages}
         />
-      </div> */}
+      </div>
     </>
   );
 }

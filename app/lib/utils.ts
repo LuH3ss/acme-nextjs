@@ -38,6 +38,12 @@ export const generateYAxis = (revenue: Revenue[]) => {
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,
   // display all pages without any ellipsis.
+
+  if (currentPage < 1 || totalPages < 1) {
+    console.error('Invalid pagination parameters:', { currentPage, totalPages });
+    return [];
+  }
+
   if (totalPages <= 7) {
     return Array.from({ length: totalPages }, (_, i) => i + 1);
   }
