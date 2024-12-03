@@ -9,7 +9,6 @@ import {
 import { usePathname } from 'next/navigation';
 
 import Link from 'next/link';
-import { ucs2 } from 'punycode';
 
 import clsx from 'clsx';
 
