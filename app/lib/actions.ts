@@ -91,8 +91,8 @@ export async function updateInvoice(id: string,prevState: State, formData: FormD
       SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
       WHERE id = ${id}
     `;
-  } catch (error) {
-    return { message: 'Database Error: Failed to Update Invoice.' };
+  } catch (e) {
+    return { message: `'Database Error: Failed to Update Invoice.' ${e}` };
   }
   
  
